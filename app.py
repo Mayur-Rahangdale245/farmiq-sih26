@@ -268,285 +268,6 @@ TEXT = {
 }
 
 # ============================================================
-# CSS
-# ============================================================
-
-st.markdown("""
-<style>
-:root {
-  --far-bg: #f4f8f6;
-  --far-surface: #ffffff;
-  --far-surface2: #eef5f1;
-  --far-text: #10231a;
-  --far-muted: #64736b;
-  --far-border: #d8e4dd;
-  --far-input: #ffffff;
-  --far-accent: #176b4d;
-  --far-accent2: #2d8a65;
-  --far-shadow: 0 8px 28px rgba(16,35,26,.07);
-}
-.stApp { background:var(--far-bg) !important; color:var(--far-text) !important; }
-.block-container { max-width:1380px; padding-top:1rem; color:var(--far-text) !important; }
-[data-testid="stSidebar"] { background:var(--far-surface) !important; border-right:1px solid var(--far-border) !important; }
-[data-testid="stSidebar"] * { color:var(--far-text) !important; }
-.stMarkdown, .stMarkdown p, .stMarkdown li, label, .stCaption { color:var(--far-text) !important; }
-[data-testid="stMetric"] {
-  background:var(--far-surface) !important;
-  border:1px solid var(--far-border) !important;
-  border-radius:16px !important;
-  box-shadow:var(--far-shadow);
-}
-[data-testid="stMetricLabel"], [data-testid="stMetricValue"] { color:var(--far-text) !important; }
-div[data-testid="stExpander"] { background:var(--far-surface) !important; border:1px solid var(--far-border) !important; border-radius:16px; }
-.stTextInput input, .stTextArea textarea, .stNumberInput input,
-[data-baseweb="select"] > div, [data-baseweb="input"] > div {
-  background:var(--far-input) !important; color:var(--far-text) !important;
-  border-color:var(--far-border) !important;
-}
-[data-baseweb="popover"], [data-baseweb="menu"] { background:var(--far-surface) !important; }
-[data-baseweb="menu"] * { color:var(--far-text) !important; }
-.stButton > button {
-  border-color:var(--far-border) !important;
-  color:var(--far-text) !important;
-  background:var(--far-surface) !important;
-  border-radius:11px !important;
-}
-.stButton > button[kind="primary"] {
-  background:var(--far-accent) !important; color:#fff !important; border-color:var(--far-accent) !important;
-}
-.stChatMessage {
-  background:var(--far-surface) !important;
-  border:1px solid var(--far-border) !important;
-  border-radius:16px !important;
-}
-.stChatInputContainer {
-  background:var(--far-surface) !important;
-}
-.hero {
- background:linear-gradient(135deg,var(--far-accent),var(--far-accent2));
- color:white; border-radius:24px; padding:1.45rem 1.8rem;
- margin-bottom:.8rem; box-shadow:0 12px 34px rgba(0,0,0,.12);
-}
-.hero h1 { margin:0; font-size:2.55rem; }
-.hero p { margin:.35rem 0 0; font-size:1.05rem; }
-.section {
- background:var(--far-surface); color:var(--far-text);
- border:1px solid var(--far-border); border-radius:20px;
- padding:1.25rem; margin:.85rem 0; box-shadow:var(--far-shadow);
-}
-.section-title { color:var(--far-text); font-size:1.35rem; font-weight:800; margin-bottom:.75rem; }
-.kpi { background:var(--far-surface2); border:1px solid var(--far-border); border-radius:15px; padding:.8rem; }
-.kpi-label { color:var(--far-muted); font-size:.8rem; }
-.kpi-value { color:var(--far-text); font-size:1.12rem; font-weight:800; margin-top:.2rem; }
-.green { background:rgba(46,160,91,.12); border:1px solid rgba(46,160,91,.35); border-radius:16px; padding:1rem; color:var(--far-text); }
-.yellow { background:rgba(235,175,45,.12); border:1px solid rgba(235,175,45,.4); border-radius:16px; padding:1rem; color:var(--far-text); }
-.red { background:rgba(220,75,65,.12); border:1px solid rgba(220,75,65,.38); border-radius:16px; padding:1rem; color:var(--far-text); }
-.blue { background:rgba(60,130,220,.12); border:1px solid rgba(60,130,220,.3); border-radius:16px; padding:1rem; color:var(--far-text); }
-.small { color:var(--far-muted) !important; font-size:.86rem; }
-.navhint { padding:.55rem .7rem; background:var(--far-surface2); border:1px solid var(--far-border); border-radius:10px; color:var(--far-text) !important; font-size:.82rem; margin-bottom:.5rem; }
-.meter { height:14px; background:var(--far-surface2); border:1px solid var(--far-border); border-radius:999px; overflow:hidden; margin:.5rem 0 1rem; }
-.meter-fill { height:100%; border-radius:999px; background:linear-gradient(90deg,#67bd8c,#1a8c62); }
-.progress-label { display:flex; justify-content:space-between; font-size:.78rem; margin:.35rem 0; }
-.progress-track { height:8px; border-radius:99px; background:var(--far-surface2); overflow:hidden; margin-bottom:.7rem; }
-.progress-fill { height:100%; border-radius:99px; background:linear-gradient(90deg,#2d8a65,#62c995); }
-.chat-header {
-  background:linear-gradient(135deg,var(--far-surface2),var(--far-surface));
-  border:1px solid var(--far-border); border-radius:20px; padding:1rem 1.15rem;
-  box-shadow:var(--far-shadow); margin-top:1rem;
-}
-.chat-header h3 { margin:0; color:var(--far-text); }
-.signal-card {
-  background:var(--far-surface); border:1px solid var(--far-border);
-  border-radius:18px; padding:1rem; box-shadow:var(--far-shadow);
-}
-</style>
-""", unsafe_allow_html=True)
-
-
-# Initialize UI preferences BEFORE any theme-dependent rendering.
-if "theme" not in st.session_state:
-    st.session_state.theme = "light"
-if "language" not in st.session_state:
-    st.session_state.language = "English"
-
-# ============================================================
-# FARMIQ LIGHT / DARK THEME
-# ============================================================
-_THEME = {
-    "light": {
-        "bg": "#f4f8f6", "surface": "#ffffff", "surface2": "#eef5f1",
-        "text": "#10231a", "muted": "#64736b", "border": "#d8e4dd",
-        "input": "#ffffff", "accent": "#176b4d", "accent2": "#2d8a65",
-        "shadow": "0 8px 28px rgba(16,35,26,.07)"
-    },
-    "dark": {
-        "bg": "#07100c", "surface": "#101b16", "surface2": "#17251e",
-        "text": "#f2faf5", "muted": "#aabdb2", "border": "#30463b",
-        "input": "#0c1511", "accent": "#55c88d", "accent2": "#79dda8",
-        "shadow": "0 10px 30px rgba(0,0,0,.30)"
-    },
-}
-_tc = _THEME[st.session_state.theme]
-st.markdown(f"""
-<style>
-:root {{
- --far-bg:{_tc['bg']}; --far-surface:{_tc['surface']}; --far-surface2:{_tc['surface2']};
- --far-text:{_tc['text']}; --far-muted:{_tc['muted']}; --far-border:{_tc['border']};
- --far-input:{_tc['input']}; --far-accent:{_tc['accent']}; --far-accent2:{_tc['accent2']};
- --far-shadow:{_tc['shadow']};
-}}
-html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"] {{
-  background:var(--far-bg) !important;
-  color:var(--far-text) !important;
-  color-scheme: { "dark" if st.session_state.theme == "dark" else "light" };
-}}
-[data-testid="stHeader"] {{ background:var(--far-bg) !important; }}
-[data-testid="stToolbar"] {{ background:transparent !important; }}
-[data-testid="stSidebar"] {{
-  background:var(--far-surface) !important;
-  border-right:1px solid var(--far-border) !important;
-}}
-[data-testid="stSidebar"] * {{ color:var(--far-text) !important; }}
-.stApp, .stAppViewContainer, .main, .block-container {{
-  color:var(--far-text) !important;
-}}
-[data-baseweb="select"] *,
-[data-baseweb="input"] *,
-[data-baseweb="textarea"] *,
-[data-testid="stTextInput"] input,
-[data-testid="stNumberInput"] input {{
-  color:var(--far-text) !important;
-  -webkit-text-fill-color:var(--far-text) !important;
-}}
-[data-baseweb="select"] > div,
-[data-baseweb="input"] > div {{
-  background:var(--far-input) !important;
-  border-color:var(--far-border) !important;
-}}
-[data-baseweb="popover"],
-[data-baseweb="menu"],
-[data-baseweb="menu"] > div {{
-  background:var(--far-surface) !important;
-}}
-[data-baseweb="menu"] * {{ color:var(--far-text) !important; }}
-</style>
-""", unsafe_allow_html=True)
-
-
-# ============================================================
-# HARDENED LIGHT / DARK THEME OVERRIDES
-# ============================================================
-_ui = _THEME[st.session_state.theme]
-st.markdown(f'''
-<style>
-html, body {{
-    background:{_ui["bg"]} !important;
-    color:{_ui["text"]} !important;
-    color-scheme:{"dark" if st.session_state.theme == "dark" else "light"} !important;
-}}
-[data-testid="stAppViewContainer"],
-[data-testid="stAppViewContainer"] > .main,
-[data-testid="stApp"],
-section.main,
-.main,
-.block-container {{
-    background:{_ui["bg"]} !important;
-    color:{_ui["text"]} !important;
-}}
-[data-testid="stHeader"], [data-testid="stToolbar"] {{
-    background:{_ui["bg"]} !important;
-}}
-[data-testid="stSidebar"],
-[data-testid="stSidebar"] > div,
-[data-testid="stSidebarContent"] {{
-    background:{_ui["surface"]} !important;
-    color:{_ui["text"]} !important;
-}}
-[data-testid="stSidebar"] * {{
-    color:{_ui["text"]} !important;
-}}
-.stMarkdown, .stMarkdown p, .stMarkdown span, .stMarkdown li,
-.stMarkdown strong, label, [data-testid="stCaptionContainer"] {{
-    color:{_ui["text"]} !important;
-}}
-[data-testid="stTextInput"] input,
-[data-testid="stNumberInput"] input,
-[data-testid="stTextArea"] textarea,
-[data-baseweb="input"] input,
-[data-baseweb="textarea"] textarea {{
-    background:{_ui["input"]} !important;
-    color:{_ui["text"]} !important;
-    -webkit-text-fill-color:{_ui["text"]} !important;
-    border-color:{_ui["border"]} !important;
-    caret-color:{_ui["text"]} !important;
-}}
-[data-testid="stTextInput"] input::placeholder,
-[data-testid="stTextArea"] textarea::placeholder {{
-    color:{_ui["muted"]} !important;
-    -webkit-text-fill-color:{_ui["muted"]} !important;
-}}
-[data-baseweb="select"] > div,
-[data-baseweb="input"] > div,
-[data-baseweb="textarea"] > div {{
-    background:{_ui["input"]} !important;
-    color:{_ui["text"]} !important;
-    border-color:{_ui["border"]} !important;
-}}
-[data-baseweb="select"] *,
-[data-baseweb="input"] *,
-[data-baseweb="textarea"] * {{
-    color:{_ui["text"]} !important;
-}}
-[data-baseweb="popover"],
-[data-baseweb="menu"],
-[data-baseweb="menu"] > div {{
-    background:{_ui["surface"]} !important;
-    color:{_ui["text"]} !important;
-}}
-[data-baseweb="menu"] * {{ color:{_ui["text"]} !important; }}
-[data-testid="stRadio"] *,
-[data-testid="stCheckbox"] *,
-[data-testid="stSlider"] *,
-[data-testid="stToggle"] * {{
-    color:{_ui["text"]} !important;
-}}
-.stButton > button {{
-    background:{_ui["surface"]} !important;
-    color:{_ui["text"]} !important;
-    border-color:{_ui["border"]} !important;
-}}
-.stButton > button[kind="primary"] {{
-    background:{_ui["accent"]} !important;
-    color:#ffffff !important;
-    border-color:{_ui["accent"]} !important;
-}}
-[data-testid="stExpander"],
-[data-testid="stTabs"],
-[data-testid="stChatMessage"],
-[data-testid="stChatInput"],
-.stChatInputContainer,
-[data-testid="stFileUploader"],
-[data-testid="stFileUploader"] section,
-[data-testid="stFileUploaderDropzone"] {{
-    background:{_ui["surface"]} !important;
-    color:{_ui["text"]} !important;
-    border-color:{_ui["border"]} !important;
-}}
-[data-testid="stExpander"] *,
-[data-testid="stTabs"] *,
-[data-testid="stChatMessage"] *,
-[data-testid="stFileUploader"] * {{
-    color:{_ui["text"]} !important;
-}}
-input:-webkit-autofill,
-textarea:-webkit-autofill {{
-    -webkit-text-fill-color:{_ui["text"]} !important;
-    -webkit-box-shadow:0 0 0 1000px {_ui["input"]} inset !important;
-}}
-</style>
-''', unsafe_allow_html=True)
-
-# ============================================================
 # HELPERS
 # ============================================================
 
@@ -602,7 +323,7 @@ def visual_gauge(value, title, subtitle="", color=None):
     fig.update_layout(
         height=245, margin=dict(l=18,r=18,t=45,b=12),
         paper_bgcolor="rgba(0,0,0,0)",
-        font={"color":"#f2faf5" if st.session_state.theme=="dark" else "#10231a"},
+        font={"color":T["text"]},
     )
     st.plotly_chart(fig, use_container_width=True, config={"displayModeBar":False})
     if subtitle:
@@ -635,7 +356,7 @@ def render_signal_dashboard(conf, risk_score, soil_score, completeness):
         showlegend=False, height=380,
         margin=dict(l=45,r=45,t=30,b=30),
         paper_bgcolor="rgba(0,0,0,0)",
-        font={"color":"#f2faf5" if st.session_state.theme=="dark" else "#10231a"},
+        font={"color":T["text"]},
     )
     st.plotly_chart(fig, use_container_width=True, config={"displayModeBar":False})
 
@@ -653,8 +374,8 @@ def visual_bar(labels, values, title, y_title, suffix=""):
         title=title, height=340, margin=dict(l=20,r=20,t=60,b=35),
         paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
         yaxis_title=y_title, xaxis=dict(showgrid=False),
-        yaxis=dict(gridcolor="#DCE8E1"),
-        font=dict(size=13)
+        yaxis=dict(gridcolor=T["grid"]),
+        font=dict(size=13, color=T["text"])
     )
     st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
@@ -686,7 +407,7 @@ def visual_pie(labels, values, title, suffix="%"):
         height=360,
         margin=dict(l=20, r=20, t=60, b=20),
         paper_bgcolor="rgba(0,0,0,0)",
-        font=dict(size=13),
+        font=dict(size=13, color=T["text"]),
         legend=dict(orientation="h", y=-0.05, x=0.5, xanchor="center")
     )
     st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
@@ -705,8 +426,8 @@ def visual_line(x, series, title, y_title):
         title=title, height=360, margin=dict(l=20,r=20,t=60,b=35),
         paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
         yaxis_title=y_title, xaxis=dict(showgrid=False),
-        yaxis=dict(gridcolor="#DCE8E1"), hovermode="x unified",
-        font=dict(size=13)
+        yaxis=dict(gridcolor=T["grid"]), hovermode="x unified",
+        font=dict(size=13, color=T["text"])
     )
     st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
@@ -802,6 +523,286 @@ if "nav_index" not in st.session_state:
     st.session_state.nav_index = 0
 if "_ui_language_changed" not in st.session_state:
     st.session_state._ui_language_changed = False
+
+# ============================================================
+# FARMIQ — SINGLE SOURCE OF TRUTH THEME
+# ============================================================
+if "theme" not in st.session_state:
+    st.session_state.theme = "light"
+
+THEME = {
+    "light": {
+        "bg": "#F6F9F7",
+        "surface": "#FFFFFF",
+        "surface2": "#EEF5F1",
+        "text": "#10231A",
+        "muted": "#617168",
+        "border": "#D6E2DB",
+        "input": "#FFFFFF",
+        "accent": "#176B4D",
+        "accent2": "#2D8A65",
+        "shadow": "0 8px 28px rgba(16,35,26,.07)",
+        "grid": "#DCE8E1",
+    },
+    "dark": {
+        "bg": "#07100C",
+        "surface": "#101B16",
+        "surface2": "#17251E",
+        "text": "#F2FAF5",
+        "muted": "#AABDB2",
+        "border": "#30463B",
+        "input": "#0C1511",
+        "accent": "#55C88D",
+        "accent2": "#79DDA8",
+        "shadow": "0 10px 30px rgba(0,0,0,.30)",
+        "grid": "#30463B",
+    },
+}
+T = THEME[st.session_state.theme]
+DARK = st.session_state.theme == "dark"
+
+st.markdown(f"""
+<style>
+:root {{
+    color-scheme: {"dark" if DARK else "light"} !important;
+    --far-bg:{T["bg"]};
+    --far-surface:{T["surface"]};
+    --far-surface2:{T["surface2"]};
+    --far-text:{T["text"]};
+    --far-muted:{T["muted"]};
+    --far-border:{T["border"]};
+    --far-input:{T["input"]};
+    --far-accent:{T["accent"]};
+    --far-accent2:{T["accent2"]};
+    --far-shadow:{T["shadow"]};
+    --far-grid:{T["grid"]};
+}}
+
+/* Page */
+html, body,
+[data-testid="stApp"],
+[data-testid="stAppViewContainer"],
+[data-testid="stAppViewContainer"] > .main,
+section.main, .main, .block-container {{
+    background:var(--far-bg) !important;
+    color:var(--far-text) !important;
+}}
+[data-testid="stHeader"] {{ background:var(--far-bg) !important; }}
+[data-testid="stToolbar"] {{ background:transparent !important; }}
+.block-container {{ max-width:1380px; padding-top:1rem; }}
+
+/* Text */
+.stMarkdown, .stMarkdown p, .stMarkdown li, .stMarkdown span,
+.stMarkdown strong, label, p, li, small {{
+    color:var(--far-text) !important;
+}}
+[data-testid="stCaptionContainer"],
+[data-testid="stCaptionContainer"] * {{
+    color:var(--far-muted) !important;
+}}
+
+/* Sidebar */
+[data-testid="stSidebar"],
+[data-testid="stSidebar"] > div,
+[data-testid="stSidebarContent"] {{
+    background:var(--far-surface) !important;
+    color:var(--far-text) !important;
+    border-color:var(--far-border) !important;
+}}
+[data-testid="stSidebar"] * {{ color:var(--far-text) !important; }}
+
+/* Streamlit/BaseWeb inputs */
+[data-testid="stTextInput"] > div,
+[data-testid="stNumberInput"] > div,
+[data-testid="stTextArea"] > div,
+[data-testid="stSelectbox"] > div,
+[data-testid="stMultiSelect"] > div {{
+    background:var(--far-surface) !important;
+}}
+[data-testid="stTextInput"] input,
+[data-testid="stNumberInput"] input,
+[data-testid="stTextArea"] textarea,
+[data-baseweb="input"] input,
+[data-baseweb="textarea"] textarea {{
+    background:var(--far-input) !important;
+    color:var(--far-text) !important;
+    -webkit-text-fill-color:var(--far-text) !important;
+    border-color:var(--far-border) !important;
+    box-shadow:none !important;
+}}
+input::placeholder, textarea::placeholder {{
+    color:var(--far-muted) !important;
+    -webkit-text-fill-color:var(--far-muted) !important;
+}}
+[data-baseweb="select"] > div {{
+    background:var(--far-input) !important;
+    color:var(--far-text) !important;
+    border-color:var(--far-border) !important;
+}}
+[data-baseweb="select"] * {{
+    color:var(--far-text) !important;
+}}
+[data-baseweb="popover"],
+[data-baseweb="menu"],
+[data-baseweb="menu"] > div {{
+    background:var(--far-surface) !important;
+    color:var(--far-text) !important;
+}}
+[data-baseweb="menu"] * {{ color:var(--far-text) !important; }}
+
+/* Controls */
+[data-testid="stRadio"] *,
+[data-testid="stCheckbox"] *,
+[data-testid="stToggle"] *,
+[data-testid="stSlider"] * {{
+    color:var(--far-text) !important;
+}}
+.stButton > button {{
+    background:var(--far-surface) !important;
+    color:var(--far-text) !important;
+    border:1px solid var(--far-border) !important;
+    border-radius:11px !important;
+}}
+.stButton > button:hover {{
+    border-color:var(--far-accent) !important;
+}}
+.stButton > button[kind="primary"] {{
+    background:var(--far-accent) !important;
+    color:#FFFFFF !important;
+    border-color:var(--far-accent) !important;
+}}
+.stButton > button[kind="primary"] * {{ color:#FFFFFF !important; }}
+
+/* Cards / expanders / metrics */
+[data-testid="stMetric"],
+[data-testid="stExpander"],
+[data-testid="stVerticalBlockBorderWrapper"],
+[data-testid="stTabs"],
+[data-testid="stChatMessage"] {{
+    background:var(--far-surface) !important;
+    color:var(--far-text) !important;
+    border-color:var(--far-border) !important;
+}}
+[data-testid="stMetricLabel"],
+[data-testid="stMetricValue"] {{ color:var(--far-text) !important; }}
+[data-testid="stExpander"] details,
+[data-testid="stExpander"] summary {{
+    background:var(--far-surface) !important;
+    color:var(--far-text) !important;
+}}
+[data-testid="stExpander"] * {{ color:var(--far-text) !important; }}
+
+/* File uploader */
+[data-testid="stFileUploader"],
+[data-testid="stFileUploader"] section,
+[data-testid="stFileUploaderDropzone"] {{
+    background:var(--far-surface) !important;
+    color:var(--far-text) !important;
+    border-color:var(--far-border) !important;
+}}
+[data-testid="stFileUploader"] * {{ color:var(--far-text) !important; }}
+
+/* Chat */
+[data-testid="stChatInput"],
+.stChatInputContainer {{
+    background:var(--far-surface) !important;
+    border-color:var(--far-border) !important;
+}}
+[data-testid="stChatInput"] textarea {{
+    background:var(--far-input) !important;
+    color:var(--far-text) !important;
+    -webkit-text-fill-color:var(--far-text) !important;
+}}
+
+/* Custom FARMIQ UI */
+.hero {{
+    background:linear-gradient(135deg,var(--far-accent),var(--far-accent2));
+    color:#FFFFFF !important;
+    border-radius:24px;
+    padding:1.45rem 1.8rem;
+    margin-bottom:.8rem;
+    box-shadow:0 12px 34px rgba(0,0,0,.12);
+}}
+.hero h1, .hero p {{ color:#FFFFFF !important; }}
+.hero h1 {{ margin:0; font-size:2.55rem; }}
+.hero p {{ margin:.35rem 0 0; font-size:1.05rem; }}
+.section {{
+    background:var(--far-surface);
+    color:var(--far-text);
+    border:1px solid var(--far-border);
+    border-radius:20px;
+    padding:1.25rem;
+    margin:.85rem 0;
+    box-shadow:var(--far-shadow);
+}}
+.section-title {{ color:var(--far-text) !important; font-size:1.35rem; font-weight:800; }}
+.kpi {{
+    background:var(--far-surface2);
+    border:1px solid var(--far-border);
+    border-radius:15px;
+    padding:.8rem;
+}}
+.kpi-label {{ color:var(--far-muted) !important; font-size:.8rem; }}
+.kpi-value {{ color:var(--far-text) !important; font-size:1.12rem; font-weight:800; }}
+.small {{ color:var(--far-muted) !important; font-size:.86rem; }}
+.navhint {{
+    padding:.55rem .7rem;
+    background:var(--far-surface2);
+    border:1px solid var(--far-border);
+    border-radius:10px;
+    color:var(--far-text) !important;
+    font-size:.82rem;
+}}
+.meter {{
+    height:14px;
+    background:var(--far-surface2);
+    border:1px solid var(--far-border);
+    border-radius:999px;
+    overflow:hidden;
+}}
+.meter-fill {{
+    height:100%;
+    border-radius:999px;
+    background:linear-gradient(90deg,#67BD8C,#1A8C62);
+}}
+.progress-track {{
+    height:8px;
+    border-radius:99px;
+    background:var(--far-surface2);
+    overflow:hidden;
+}}
+.progress-fill {{
+    height:100%;
+    border-radius:99px;
+    background:linear-gradient(90deg,var(--far-accent),#62C995);
+}}
+.signal-card {{
+    background:var(--far-surface);
+    border:1px solid var(--far-border);
+    border-radius:18px;
+    padding:1rem;
+    box-shadow:var(--far-shadow);
+}}
+.chat-header {{
+    background:var(--far-surface2);
+    border:1px solid var(--far-border);
+    border-radius:20px;
+    padding:1rem 1.15rem;
+    box-shadow:var(--far-shadow);
+}}
+.chat-header h3 {{ color:var(--far-text) !important; margin:0; }}
+
+/* Native browser autofill */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill {{
+    -webkit-text-fill-color:var(--far-text) !important;
+    -webkit-box-shadow:0 0 0 1000px var(--far-input) inset !important;
+}}
+</style>
+""", unsafe_allow_html=True)
+
 
 
 if "demo" not in st.session_state:
@@ -2277,4 +2278,3 @@ if st.session_state.nav in WORKFLOW:
             st.session_state.nav = WORKFLOW[wi+1]
             st.session_state.nav_index = wi+1
             st.rerun()
-
