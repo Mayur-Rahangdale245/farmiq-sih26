@@ -967,7 +967,7 @@ with st.sidebar:
         ))
         _configured_key = get_groq_key().strip()
         if _configured_key:
-            st.success("🔐 Groq API key configured", icon="✓")
+            st.success("🔐 Groq API key configured")
             st.caption(h_or_e(
                 "Using your saved environment/Streamlit secret. No need to enter it again.",
                 "सहेजी गई environment/Streamlit secret का उपयोग हो रहा है। दोबारा key डालने की जरूरत नहीं है।"
