@@ -432,6 +432,120 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"] {{
 </style>
 """, unsafe_allow_html=True)
 
+
+# ============================================================
+# HARDENED LIGHT / DARK THEME OVERRIDES
+# ============================================================
+_ui = _THEME[st.session_state.theme]
+st.markdown(f'''
+<style>
+html, body {{
+    background:{_ui["bg"]} !important;
+    color:{_ui["text"]} !important;
+    color-scheme:{"dark" if st.session_state.theme == "dark" else "light"} !important;
+}}
+[data-testid="stAppViewContainer"],
+[data-testid="stAppViewContainer"] > .main,
+[data-testid="stApp"],
+section.main,
+.main,
+.block-container {{
+    background:{_ui["bg"]} !important;
+    color:{_ui["text"]} !important;
+}}
+[data-testid="stHeader"], [data-testid="stToolbar"] {{
+    background:{_ui["bg"]} !important;
+}}
+[data-testid="stSidebar"],
+[data-testid="stSidebar"] > div,
+[data-testid="stSidebarContent"] {{
+    background:{_ui["surface"]} !important;
+    color:{_ui["text"]} !important;
+}}
+[data-testid="stSidebar"] * {{
+    color:{_ui["text"]} !important;
+}}
+.stMarkdown, .stMarkdown p, .stMarkdown span, .stMarkdown li,
+.stMarkdown strong, label, [data-testid="stCaptionContainer"] {{
+    color:{_ui["text"]} !important;
+}}
+[data-testid="stTextInput"] input,
+[data-testid="stNumberInput"] input,
+[data-testid="stTextArea"] textarea,
+[data-baseweb="input"] input,
+[data-baseweb="textarea"] textarea {{
+    background:{_ui["input"]} !important;
+    color:{_ui["text"]} !important;
+    -webkit-text-fill-color:{_ui["text"]} !important;
+    border-color:{_ui["border"]} !important;
+    caret-color:{_ui["text"]} !important;
+}}
+[data-testid="stTextInput"] input::placeholder,
+[data-testid="stTextArea"] textarea::placeholder {{
+    color:{_ui["muted"]} !important;
+    -webkit-text-fill-color:{_ui["muted"]} !important;
+}}
+[data-baseweb="select"] > div,
+[data-baseweb="input"] > div,
+[data-baseweb="textarea"] > div {{
+    background:{_ui["input"]} !important;
+    color:{_ui["text"]} !important;
+    border-color:{_ui["border"]} !important;
+}}
+[data-baseweb="select"] *,
+[data-baseweb="input"] *,
+[data-baseweb="textarea"] * {{
+    color:{_ui["text"]} !important;
+}}
+[data-baseweb="popover"],
+[data-baseweb="menu"],
+[data-baseweb="menu"] > div {{
+    background:{_ui["surface"]} !important;
+    color:{_ui["text"]} !important;
+}}
+[data-baseweb="menu"] * {{ color:{_ui["text"]} !important; }}
+[data-testid="stRadio"] *,
+[data-testid="stCheckbox"] *,
+[data-testid="stSlider"] *,
+[data-testid="stToggle"] * {{
+    color:{_ui["text"]} !important;
+}}
+.stButton > button {{
+    background:{_ui["surface"]} !important;
+    color:{_ui["text"]} !important;
+    border-color:{_ui["border"]} !important;
+}}
+.stButton > button[kind="primary"] {{
+    background:{_ui["accent"]} !important;
+    color:#ffffff !important;
+    border-color:{_ui["accent"]} !important;
+}}
+[data-testid="stExpander"],
+[data-testid="stTabs"],
+[data-testid="stChatMessage"],
+[data-testid="stChatInput"],
+.stChatInputContainer,
+[data-testid="stFileUploader"],
+[data-testid="stFileUploader"] section,
+[data-testid="stFileUploaderDropzone"] {{
+    background:{_ui["surface"]} !important;
+    color:{_ui["text"]} !important;
+    border-color:{_ui["border"]} !important;
+}}
+[data-testid="stExpander"] *,
+[data-testid="stTabs"] *,
+[data-testid="stChatMessage"] *,
+[data-testid="stFileUploader"] * {{
+    color:{_ui["text"]} !important;
+}}
+input:-webkit-autofill,
+textarea:-webkit-autofill {{
+    -webkit-text-fill-color:{_ui["text"]} !important;
+    -webkit-box-shadow:0 0 0 1000px {_ui["input"]} inset !important;
+}}
+</style>
+''', unsafe_allow_html=True)
+
 # ============================================================
 # HELPERS
 # ============================================================
