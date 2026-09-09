@@ -395,9 +395,40 @@ st.markdown(f"""
  --far-input:{_tc['input']}; --far-accent:{_tc['accent']}; --far-accent2:{_tc['accent2']};
  --far-shadow:{_tc['shadow']};
 }}
-html, body, [data-testid="stAppViewContainer"] {{ background:var(--far-bg) !important; }}
+html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"] {{
+  background:var(--far-bg) !important;
+  color:var(--far-text) !important;
+  color-scheme: { "dark" if st.session_state.theme == "dark" else "light" };
+}}
 [data-testid="stHeader"] {{ background:var(--far-bg) !important; }}
 [data-testid="stToolbar"] {{ background:transparent !important; }}
+[data-testid="stSidebar"] {{
+  background:var(--far-surface) !important;
+  border-right:1px solid var(--far-border) !important;
+}}
+[data-testid="stSidebar"] * {{ color:var(--far-text) !important; }}
+.stApp, .stAppViewContainer, .main, .block-container {{
+  color:var(--far-text) !important;
+}}
+[data-baseweb="select"] *,
+[data-baseweb="input"] *,
+[data-baseweb="textarea"] *,
+[data-testid="stTextInput"] input,
+[data-testid="stNumberInput"] input {{
+  color:var(--far-text) !important;
+  -webkit-text-fill-color:var(--far-text) !important;
+}}
+[data-baseweb="select"] > div,
+[data-baseweb="input"] > div {{
+  background:var(--far-input) !important;
+  border-color:var(--far-border) !important;
+}}
+[data-baseweb="popover"],
+[data-baseweb="menu"],
+[data-baseweb="menu"] > div {{
+  background:var(--far-surface) !important;
+}}
+[data-baseweb="menu"] * {{ color:var(--far-text) !important; }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -682,17 +713,17 @@ if "chat_messages" not in st.session_state:
     st.session_state.chat_messages = []
 
 if "groq_api_key" not in st.session_state:
-    _cloud_key = ""
+    _stored_groq_key = os.getenv("GROQ_API_KEY", "")
     try:
-        _cloud_key = st.secrets.get("GROQ_API_KEY", "")
+        _stored_groq_key = _stored_groq_key or st.secrets.get("GROQ_API_KEY", "")
     except Exception:
         pass
-    st.session_state.groq_api_key = os.getenv("GROQ_API_KEY", "") or _cloud_key
+    st.session_state.groq_api_key = _stored_groq_key
 
 GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-20b")
 
 def get_groq_key():
-    """Read Groq key from session, environment, or Streamlit Cloud secrets."""
+    """Read Groq key from session, environment, or Streamlit secrets."""
     key = st.session_state.get("groq_api_key", "") or os.getenv("GROQ_API_KEY", "")
     if key:
         return key
@@ -934,13 +965,21 @@ with st.sidebar:
             "Powered by Groq. Key is kept in this session only.",
             "Groq द्वारा संचालित। API key केवल इस session में रखी जाती है।"
         ))
-        st.session_state.groq_api_key = st.text_input(
-            "Groq API Key",
-            value=st.session_state.groq_api_key,
-            type="password",
-            placeholder="gsk_...",
-            help="For local demos, paste your Groq key here. Do not commit it to GitHub."
-        )
+        _configured_key = get_groq_key().strip()
+        if _configured_key:
+            st.success("🔐 Groq API key configured", icon="✓")
+            st.caption(h_or_e(
+                "Using your saved environment/Streamlit secret. No need to enter it again.",
+                "सहेजी गई environment/Streamlit secret का उपयोग हो रहा है। दोबारा key डालने की जरूरत नहीं है।"
+            ))
+        else:
+            st.session_state.groq_api_key = st.text_input(
+                "Groq API Key",
+                value="",
+                type="password",
+                placeholder="gsk_...",
+                help="For local demos, paste your Groq key here. For deployment, use Streamlit Secrets."
+            )
         if st.button("🔌 Test FARMIQ AI connection", use_container_width=True):
             ok, msg = test_groq_connection()
             if ok:
