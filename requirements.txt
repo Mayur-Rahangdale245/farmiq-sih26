@@ -1,0 +1,9 @@
+streamlit>=1.50
+pandas
+requests
+Pillow
+plotly
+torch
+torchvision
+transformers
+safetensors
